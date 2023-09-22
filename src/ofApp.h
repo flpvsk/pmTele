@@ -2,15 +2,16 @@
 
 #include <memory>
 #include "ofMain.h"
+#include "pmView.h"
 #include "pmLogoFeedback.h"
 #include "pmWaveFeedback.h"
 
 class ofApp : public ofBaseApp{
   private:
     int currentApp;
-    std::array<unique_ptr<ofBaseApp>, 2> apps = {
-      std::unique_ptr<ofBaseApp>(new pmLogoFeedback()),
-      std::unique_ptr<ofBaseApp>(new pmWaveFeedback()),
+    std::array<unique_ptr<pmView>, 2> apps = {
+      std::unique_ptr<pmWaveFeedback>(new pmWaveFeedback()),
+      std::unique_ptr<pmLogoFeedback>(new pmLogoFeedback()),
     };
 
   public:

@@ -4,6 +4,9 @@
 void ofApp::setup() {
   ofSetVerticalSync(true);
   ofSetFrameRate(24);
+  ofDisableAntiAliasing();
+  ofDisableSmoothing();
+  ofEnableAlphaBlending();
 
   ofBackground(0);
 
@@ -15,7 +18,7 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update() {
   auto seconds = ofGetElapsedTimeMillis() / 1000;
-  currentApp = fmod(floor(seconds / 10), apps.size());
+  currentApp = fmod(floor(seconds / 4), apps.size());
   auto &&app = apps[currentApp];
   app->update();
 }

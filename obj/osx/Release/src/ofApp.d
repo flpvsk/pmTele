@@ -387,6 +387,7 @@ obj/osx/Release/src/ofApp.o: \
   ../../../libs/openFrameworks/3d/of3dUtils.h \
   ../../../libs/openFrameworks/3d/ofCamera.h \
   ../../../libs/openFrameworks/3d/ofEasyCam.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/apps/myApps/pmTele/src/pmView.h \
   /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/apps/myApps/pmTele/src/pmLogoFeedback.h \
   /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/apps/myApps/pmTele/src/pmWaveFeedback.h
 
@@ -1163,6 +1164,8 @@ obj/osx/Release/src/ofApp.o: \
 ../../../libs/openFrameworks/3d/ofCamera.h:
 
 ../../../libs/openFrameworks/3d/ofEasyCam.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/apps/myApps/pmTele/src/pmView.h:
 
 /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/apps/myApps/pmTele/src/pmLogoFeedback.h:
 

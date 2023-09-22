@@ -1,11 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
+#include "pmView.h"
 
-class pmLogoFeedback: public ofBaseApp {
+class pmLogoFeedback: public pmView {
   public:
     void setup() override;
     void update() override;
     void draw() override;
-    void exit() override;
 };

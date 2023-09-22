@@ -1,15 +1,16 @@
 #pragma once
 
 #include "ofMain.h"
+#include "pmView.h"
 
-class pmWaveFeedback: public ofBaseApp {
-
-	public:
-		void setup();
-		void update();
-		void draw();
-
+class pmWaveFeedback: public pmView {
+  private:
     ofShader shader_Feedback;
     ofFbo framebuffer0;
     ofFbo framebuffer1;
+
+	public:
+		void setup() override;
+		void update() override;
+		void draw() override;
 };

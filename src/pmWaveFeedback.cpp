@@ -26,6 +26,10 @@ void pmWaveFeedback::update() {
 
 //--------------------------------------------------------------
 void pmWaveFeedback::draw() {
+  ofSetColor(
+    ofColor::fromHsb(0, 0, 255)
+  );
+
   framebuffer0.begin();
   shader_Feedback.begin();
 
@@ -35,16 +39,18 @@ void pmWaveFeedback::draw() {
   shader_Feedback.setUniform1f("mixxx",sx);
 
   ofVec2f feedback_Displace;
-  dc = 0.7 + 0.1 * sin(ofGetElapsedTimef()/8);
-  fv = 0.;
+  dc = 0.5 + 0.5 * sin(ofGetElapsedTimef()/8);
+  fv = 0.5 * sin(ofGetElapsedTimef()/20);
   feedback_Displace.set(dc, fv);
   shader_Feedback.setUniform2f("feedback_Displace",feedback_Displace);
 
   shader_Feedback.end();
 
   float r = 2;
-  float c = 77 + 127 + 50 * sin(ofGetElapsedTimef()/8);
-  ofSetColor(c, c, c, 255);
+  ofSetColor(
+    ofColor::fromHsb(
+      0, 0, 245 + 10 * sin(ofGetElapsedTimef()/8), 255)
+  );
   ofDrawCircle(
     ofGetWidth() - r,
     r + (ofGetHeight() - 20) * (
@@ -54,13 +60,10 @@ void pmWaveFeedback::draw() {
     r
   );
 
+
   framebuffer0.end();
 
-  ofBackground(
-    ofColor::fromHsb(0, 0, 20)
-  );
   framebuffer0.draw(0,0);
-
 
   framebuffer1.begin();
   framebuffer0.draw(0,0);
