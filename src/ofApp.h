@@ -5,13 +5,15 @@
 #include "pmView.h"
 #include "pmLogoFeedback.h"
 #include "pmWaveFeedback.h"
+#include "pmFadingLines.h"
 
 class ofApp : public ofBaseApp{
   private:
     int currentApp;
-    std::array<unique_ptr<pmView>, 2> apps = {
+    std::array<unique_ptr<pmView>, 3> apps = {
       std::unique_ptr<pmWaveFeedback>(new pmWaveFeedback()),
       std::unique_ptr<pmLogoFeedback>(new pmLogoFeedback()),
+      std::unique_ptr<pmFadingLines>(new pmFadingLines()),
     };
 
   public:

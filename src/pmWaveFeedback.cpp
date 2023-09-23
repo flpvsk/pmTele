@@ -35,12 +35,12 @@ void pmWaveFeedback::draw() {
 
   framebuffer1.draw(0,0);
 
-  sx = 2.5 + 1 * sin(sin(ofGetElapsedTimef()/9));
+  sx = 3.9 + 1 * sin(sin(ofGetElapsedTimef()/9));
   shader_Feedback.setUniform1f("mixxx",sx);
 
   ofVec2f feedback_Displace;
   dc = 0.5 + 0.5 * sin(ofGetElapsedTimef()/8);
-  fv = 0.5 * sin(ofGetElapsedTimef()/20);
+  fv = 0.0;
   feedback_Displace.set(dc, fv);
   shader_Feedback.setUniform2f("feedback_Displace",feedback_Displace);
 
@@ -68,4 +68,10 @@ void pmWaveFeedback::draw() {
   framebuffer1.begin();
   framebuffer0.draw(0,0);
   framebuffer1.end();
+
+  ofDrawBitmapString((
+    " sx = "+ofToString(floor(sx * 100) / 100) +
+    ", dc = "+ofToString(floor(dc * 100) / 100) +
+    ", fv = "+ofToString(floor(fv * 100) / 100)
+  ), 10, ofGetHeight() - 5);
 }
