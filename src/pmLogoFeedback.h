@@ -8,4 +8,5 @@ class pmLogoFeedback: public pmView {
     void setup() override;
     void update() override;
     void draw() override;
+    void receiveOscMessage(ofxOscMessage m) override;
 };

@@ -7,8 +7,15 @@
 #include "pmWaveFeedback.h"
 #include "pmFadingLines.h"
 
+#include "ofxOsc.h"
+
+// listening port
+#define OSC_PORT 8000
+
 class ofApp : public ofBaseApp{
   private:
+    ofxOscReceiver receiver;
+
     int currentApp;
     std::array<unique_ptr<pmView>, 3> apps = {
       std::unique_ptr<pmWaveFeedback>(new pmWaveFeedback()),

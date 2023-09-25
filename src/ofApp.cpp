@@ -2,6 +2,9 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+  ofLog() << "listening for osc messages on port " << OSC_PORT;
+  receiver.setup(OSC_PORT);
+
   ofSetVerticalSync(true);
   ofSetFrameRate(24);
   ofDisableAntiAliasing();
@@ -17,6 +20,15 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
+  while (receiver.hasWaitingMessages()) {
+    ofxOscMessage m;
+    receiver.getNextMessage(m);
+
+    for (auto &&app: apps) {
+      app->receiveOscMessage(m);
+    }
+  }
+
   auto seconds = ofGetElapsedTimeMillis() / 1000;
   currentApp = fmod(floor(seconds / 4), apps.size());
   auto &&app = apps[currentApp];

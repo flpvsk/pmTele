@@ -57,3 +57,6 @@ void pmLogoFeedback::draw() {
   );
 }
 
+void pmLogoFeedback::receiveOscMessage(ofxOscMessage m) {
+
+}

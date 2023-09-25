@@ -387,7 +387,22 @@ obj/osx/Release/src/pmWaveFeedback.o: \
   ../../../libs/openFrameworks/3d/of3dUtils.h \
   ../../../libs/openFrameworks/3d/ofCamera.h \
   ../../../libs/openFrameworks/3d/ofEasyCam.h \
-  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/apps/myApps/pmTele/src/pmView.h
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/apps/myApps/pmTele/src/pmView.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOsc.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscArg.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscMessage.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscSender.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscTypes.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscException.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/UdpSocket.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscBundle.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscReceiver.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.h \
+  /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/../ip/PacketListener.h
 
 /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/apps/myApps/pmTele/src/pmWaveFeedback.h:
 
@@ -1164,3 +1179,33 @@ obj/osx/Release/src/pmWaveFeedback.o: \
 ../../../libs/openFrameworks/3d/ofEasyCam.h:
 
 /Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/apps/myApps/pmTele/src/pmView.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOsc.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscArg.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscMessage.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscSender.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscTypes.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscException.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/UdpSocket.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscBundle.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscReceiver.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.h:
+
+/Volumes/hdd/Projects/openFrameworks/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/../ip/PacketListener.h:

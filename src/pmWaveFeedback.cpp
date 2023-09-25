@@ -75,3 +75,8 @@ void pmWaveFeedback::draw() {
     ", fv = "+ofToString(floor(fv * 100) / 100)
   ), 10, ofGetHeight() - 5);
 }
+
+
+void pmWaveFeedback::receiveOscMessage(ofxOscMessage m) {
+
+}

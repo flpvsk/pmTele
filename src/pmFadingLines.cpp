@@ -3,6 +3,8 @@
 
 void pmFadingLines::setup() {
   maxPoints = 400;
+  bgColor = ofColor::fromHsb(0, 0, 20);
+  fgColor = ofColor::fromHsb(0, 0, 255);
 };
 
 void pmFadingLines::update() {
@@ -28,6 +30,7 @@ void pmFadingLines::update() {
 };
 
 void pmFadingLines::draw() {
+  ofBackground(bgColor);
   ofPoint prevPoint;
   bool hasFirstPoint = false;
   auto bounds = ofRectangle(
@@ -43,7 +46,7 @@ void pmFadingLines::draw() {
       hasFirstPoint = true;
       continue;
     }
-    ofSetColor(ofColor::fromHsb(0, 0, 255));
+    ofSetColor(fgColor);
     ofSetLineWidth(1.5);
 
     ofDrawLine(
@@ -60,3 +63,21 @@ void pmFadingLines::draw() {
     prevPoint = point;
   }
 };
+
+void pmFadingLines::receiveOscMessage(ofxOscMessage m) {
+  if (m.getAddress() == "/color/bg/hsb") {
+    bgColor = ofColor::fromHsb(
+      255 * m.getArgAsFloat(0),
+      255 * m.getArgAsFloat(1),
+      255 * m.getArgAsFloat(2)
+    );
+  }
+
+  if (m.getAddress() == "/color/fg/hsb") {
+    fgColor = ofColor::fromHsb(
+      255 * m.getArgAsFloat(0),
+      255 * m.getArgAsFloat(1),
+      255 * m.getArgAsFloat(2)
+    );
+  }
+}
