@@ -6,7 +6,7 @@ float fv=1;
 
 //--------------------------------------------------------------
 void pmWaveFeedback::setup() {
-  shader_Feedback.load("shadersGL2/shader_feedback");
+  waveFeedbackShader.load("shadersGL2/waveFeedback");
   framebuffer0.allocate(ofGetWidth(), ofGetHeight());
   framebuffer1.allocate(ofGetWidth(), ofGetHeight());
 
@@ -31,20 +31,23 @@ void pmWaveFeedback::draw() {
   );
 
   framebuffer0.begin();
-  shader_Feedback.begin();
+  waveFeedbackShader.begin();
 
   framebuffer1.draw(0,0);
 
   sx = 3.9 + 1 * sin(sin(ofGetElapsedTimef()/9));
-  shader_Feedback.setUniform1f("mixxx",sx);
+  waveFeedbackShader.setUniform1f("mixxx",sx);
 
   ofVec2f feedback_Displace;
   dc = 0.5 + 0.5 * sin(ofGetElapsedTimef()/8);
   fv = 0.0;
   feedback_Displace.set(dc, fv);
-  shader_Feedback.setUniform2f("feedback_Displace",feedback_Displace);
+  waveFeedbackShader.setUniform2f(
+    "feedback_Displace",
+    feedback_Displace
+  );
 
-  shader_Feedback.end();
+  waveFeedbackShader.end();
 
   float r = 2;
   ofSetColor(

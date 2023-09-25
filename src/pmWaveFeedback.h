@@ -5,7 +5,7 @@
 
 class pmWaveFeedback: public pmView {
   private:
-    ofShader shader_Feedback;
+    ofShader waveFeedbackShader;
     ofFbo framebuffer0;
     ofFbo framebuffer1;
 

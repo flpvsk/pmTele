@@ -27,7 +27,32 @@ ofRectangle getBitmapStringBoundingBox(string text) {
 
 
 void pmLogoFeedback::setup() {
+  ofDisableArbTex();
 
+  bgColor = ofColor::fromHsb(0, 0, 20);
+  fgColor = ofColor::fromHsb(0, 0, 255);
+
+  ofLoadImage(logo, "img/perry-color-small.png");
+  logo.setTextureWrap(GL_REPEAT, GL_REPEAT);
+
+  traceShapeShader.load(
+    "shadersGL2/generic.vert",
+    "shadersGL2/traceShape.frag"
+  );
+
+  mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+  mesh.addVertex(ofPoint(-1.,-1));
+  mesh.addTexCoord(ofVec2f(0.,1.));
+  mesh.addColor(ofFloatColor(1.));
+  mesh.addVertex(ofPoint(-1.,1));
+  mesh.addTexCoord(ofVec2f(0.,0.));
+  mesh.addColor(ofFloatColor(1.));
+  mesh.addVertex(ofPoint(1.,1));
+  mesh.addTexCoord(ofVec2f(1.,0.));
+  mesh.addColor(ofFloatColor(1.));
+  mesh.addVertex(ofPoint(1.,-1));
+  mesh.addTexCoord(ofVec2f(1.,1.));
+  mesh.addColor(ofFloatColor(1.));
 }
 
 void pmLogoFeedback::update() {
@@ -35,28 +60,56 @@ void pmLogoFeedback::update() {
 }
 
 void pmLogoFeedback::draw() {
-  // ofClear(
-  //   ofColor::fromHsb(0, 0, 20)
-  // );
+  // ofBackground(bgColor);
+  float width = ofGetWidth();
+  float height = ofGetHeight();
+  ofPoint center = ofPoint(width, height) * 0.5;
 
-  // ofBackground(
-    // ofColor::fromHsb(0, 0, 20)
-  // );
+  ofPushMatrix();
+  ofTranslate(center);
 
-  ofSetColor(
-    ofColor::fromHsb(0, 0, 120)
+  traceShapeShader.begin();
+
+  traceShapeShader.setUniformTexture("u_tex0", logo, 0);
+  traceShapeShader.setUniform2f(
+    "u_tex0Resolution",
+    logo.getWidth(),
+    logo.getHeight()
   );
 
-  auto t = "hello hi hello";
-  auto textBounds = getBitmapStringBoundingBox(t);
+  traceShapeShader.setUniform2f("u_resolution", ofVec2f(
+    width,
+    height
+  ));
 
-  ofDrawBitmapString(
-    t,
-    (ofGetWidth() - textBounds.getWidth()) / 2,
-    (ofGetHeight() - textBounds.getHeight()) / 2
+  traceShapeShader.setUniform3f(
+    "u_color",
+    fgColor.r / 255.,
+    fgColor.g / 255.,
+    fgColor.b / 255.
   );
+
+  ofScale(width * 0.5, height * 0.5, 1);
+  mesh.draw();
+
+  traceShapeShader.end();
+  ofPopMatrix();
 }
 
 void pmLogoFeedback::receiveOscMessage(ofxOscMessage m) {
+  if (m.getAddress() == "/color/bg/hsb") {
+    bgColor = ofColor::fromHsb(
+      255 * m.getArgAsFloat(0),
+      255 * m.getArgAsFloat(1),
+      255 * m.getArgAsFloat(2)
+    ).clamp();
+  }
 
+  if (m.getAddress() == "/color/fg/hsb") {
+    fgColor = ofColor::fromHsb(
+      255 * m.getArgAsFloat(0),
+      255 * m.getArgAsFloat(1),
+      255 * m.getArgAsFloat(2)
+    ).clamp();
+  }
 }
