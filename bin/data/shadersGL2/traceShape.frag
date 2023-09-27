@@ -18,7 +18,7 @@ void main() {
   vec2 proportions = u_tex0Resolution / u_resolution;
   vec4 tex = texture2D(
     u_tex0,
-    (vec2(uv.x, 1. - uv.y) + u_offset) / (proportions * u_scale)
+    (vec2(uv.x, uv.y) + u_offset) / (proportions * u_scale)
   );
 
   float shape = quant((tex.r + tex.g + tex.b) / 3., 4);
