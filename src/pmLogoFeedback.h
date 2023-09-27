@@ -11,6 +11,9 @@ class pmLogoFeedback: public pmView {
     ofShader traceShapeShader;
     ofVboMesh mesh;
 
+    float scale;
+    ofVec2f offset;
+
   public:
     void setup() override;
     void update() override;

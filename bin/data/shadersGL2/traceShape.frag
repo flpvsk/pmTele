@@ -3,6 +3,8 @@
 uniform sampler2D u_tex0;
 uniform vec2 u_tex0Resolution;
 uniform vec2 u_resolution;
+uniform vec2 u_offset;
+uniform float u_scale;
 uniform vec3 u_color;
 varying vec2 v_texcoord;
 
@@ -16,18 +18,19 @@ void main() {
   vec2 proportions = u_tex0Resolution / u_resolution;
   vec4 tex = texture2D(
     u_tex0,
-    vec2(uv.x, 1. - uv.y) / proportions
+    (vec2(uv.x, 1. - uv.y) + u_offset) / (proportions * u_scale)
   );
 
   float shape = quant((tex.r + tex.g + tex.b) / 3., 4);
   vec3 mix = shape * vec3(
-    quant(u_color.r, 4),
-    quant(u_color.g, 4),
-    quant(u_color.b, 4)
+    u_color.r,
+    u_color.g,
+    u_color.b
   );
+
   color = vec4(
     mix,
-    quant(tex.a, 4)
+    tex.a
   );
 
   gl_FragColor = color;

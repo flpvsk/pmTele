@@ -31,6 +31,7 @@ void pmLogoFeedback::setup() {
 
   bgColor = ofColor::fromHsb(0, 0, 20);
   fgColor = ofColor::fromHsb(0, 0, 255);
+  scale = 1;
 
   ofLoadImage(logo, "img/perry-color-small.png");
   logo.setTextureWrap(GL_REPEAT, GL_REPEAT);
@@ -60,7 +61,7 @@ void pmLogoFeedback::update() {
 }
 
 void pmLogoFeedback::draw() {
-  // ofBackground(bgColor);
+  ofBackground(bgColor);
   float width = ofGetWidth();
   float height = ofGetHeight();
   ofPoint center = ofPoint(width, height) * 0.5;
@@ -81,6 +82,9 @@ void pmLogoFeedback::draw() {
     width,
     height
   ));
+
+  traceShapeShader.setUniform2f("u_offset", offset);
+  traceShapeShader.setUniform1f("u_scale", scale);
 
   traceShapeShader.setUniform3f(
     "u_color",
@@ -111,5 +115,16 @@ void pmLogoFeedback::receiveOscMessage(ofxOscMessage m) {
       255 * m.getArgAsFloat(1),
       255 * m.getArgAsFloat(2)
     ).clamp();
+  }
+
+  if (m.getAddress() == "/logoFeedback/scale") {
+    scale = ofClamp(m.getArgAsFloat(0), 0, 1);
+  }
+
+  if (m.getAddress() == "/logoFeedback/offset") {
+    offset = ofVec2f(
+      ofClamp(m.getArgAsFloat(0), 0, 1),
+      ofClamp(m.getArgAsFloat(0), 0, 1)
+    );
   }
 }

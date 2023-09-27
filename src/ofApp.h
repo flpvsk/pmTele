@@ -17,10 +17,10 @@ class ofApp : public ofBaseApp{
     ofxOscReceiver receiver;
 
     int currentApp;
-    std::array<unique_ptr<pmView>, 3> apps = {
-      std::unique_ptr<pmWaveFeedback>(new pmWaveFeedback()),
+    std::array<unique_ptr<pmView>, 1> apps = {
+      // std::unique_ptr<pmWaveFeedback>(new pmWaveFeedback()),
       std::unique_ptr<pmLogoFeedback>(new pmLogoFeedback()),
-      std::unique_ptr<pmFadingLines>(new pmFadingLines()),
+      // std::unique_ptr<pmFadingLines>(new pmFadingLines()),
     };
 
   public:
