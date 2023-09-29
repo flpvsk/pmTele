@@ -2,7 +2,7 @@
 
 
 void pmFadingLines::setup() {
-  maxPoints = 400;
+  maxPoints = 100;
   bgColor = ofColor::fromHsb(0, 0, 20);
   fgColor = ofColor::fromHsb(0, 0, 255);
   spread = ofVec2f(0.01, 0.02);
@@ -15,11 +15,13 @@ void pmFadingLines::update() {
     return;
   }
 
+  float w = ofGetWidth();
+  float h = ofGetHeight();
   auto bounds = ofRectangle(
-      0,
-      0,
-      ofGetWidth(),
-      ofGetHeight()
+      0.1 * w,
+      0.1 * h,
+      0.8 * w,
+      0.8 * h
   );
   ofVec2f spreadAbs = ofVec2f(
     spread.x * ofGetWidth(),

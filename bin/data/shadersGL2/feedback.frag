@@ -27,7 +27,7 @@ void main() {
     tex0,
     (
       uv
-      + 0.01 * vec2(sin(u_time * 0.1), sin(u_time * 0.02))
+      // + 0.01 * vec2(sin(u_time * 0.1), sin(u_time * 0.02))
     ) * (1.00 + 0.01 * sin(u_time * 0.1))
   );
 
@@ -35,7 +35,7 @@ void main() {
 
   color = fbAmount * mix(
     texFb,
-    texFbDisplace, 1.5 + 1.5 * sin(u_time * 0.1)
+    texFbDisplace, 2 + 4 * sin(u_time * 0.001)
   );
   // color = quantColor(color, 2);
   // gl_FragColor = vec4(color.rgb - floor((100. * color.rgb)) / 100., 1.);

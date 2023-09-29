@@ -6,7 +6,7 @@ void ofApp::setup() {
   receiver.setup(OSC_PORT);
 
   ofSetVerticalSync(true);
-  ofSetFrameRate(24);
+  ofSetFrameRate(60);
   ofDisableAntiAliasing();
   ofDisableSmoothing();
   ofDisableArbTex();
