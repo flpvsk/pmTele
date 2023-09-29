@@ -7,6 +7,7 @@
 #include "pmWaveFeedback.h"
 #include "pmFadingLines.h"
 #include "pmFeedbackShaderWrapper.h"
+#include "pmRect.h"
 
 #include "ofxOsc.h"
 
@@ -20,8 +21,11 @@ class ofApp : public ofBaseApp{
     int currentApp;
     std::array<unique_ptr<pmView>, 1> apps = {
       // unique_ptr<pmWaveFeedback>(new pmWaveFeedback()),
+      // unique_ptr<pmFeedbackShaderWrapper>(new pmFeedbackShaderWrapper(
+      //   unique_ptr<pmLogoFeedback>(new pmLogoFeedback())
+      // )),
       unique_ptr<pmFeedbackShaderWrapper>(new pmFeedbackShaderWrapper(
-        unique_ptr<pmLogoFeedback>(new pmLogoFeedback())
+        unique_ptr<pmRect>(new pmRect())
       )),
       // unique_ptr<pmFadingLines>(new pmFadingLines()),
     };

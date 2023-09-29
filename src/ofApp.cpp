@@ -9,6 +9,7 @@ void ofApp::setup() {
   ofSetFrameRate(24);
   ofDisableAntiAliasing();
   ofDisableSmoothing();
+  ofDisableArbTex();
   ofEnableAlphaBlending();
 
   ofBackground(0);

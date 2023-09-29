@@ -16,6 +16,8 @@ class pmFeedbackShaderWrapper: public pmView {
 
     ofColor bgColor;
 
+    ofTexture img;
+
   public:
     pmFeedbackShaderWrapper(unique_ptr<pmView>);
     void setup() override;

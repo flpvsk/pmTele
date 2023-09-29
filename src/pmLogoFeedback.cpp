@@ -27,8 +27,6 @@ ofRectangle getBitmapStringBoundingBox(string text) {
 
 
 void pmLogoFeedback::setup() {
-  ofDisableArbTex();
-
   bgColor = ofColor::fromHsb(0, 0, 20);
   fgColor = ofColor::fromHsb(0, 0, 255);
   scale = 1;

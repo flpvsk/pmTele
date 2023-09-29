@@ -11,18 +11,17 @@ uniform vec2 u_displace;
 
 uniform float u_time;
 
+varying vec2 v_texcoord;
+
 void main() {
   vec4 color = vec4(0,0,0,0);
   vec2 uv = gl_FragCoord.xy / u_resolution;
-  vec4 tex0 = texture2D(u_tex1, uv);
-  vec4 tex1 = texture2D(
-    u_tex0,
-    uv + vec2(0.01 * sin(u_time * 0.01))
-  );
+  vec4 tex0 = texture2D(u_tex0, uv);
+  vec4 tex1 = texture2D(u_tex1, uv);
 
   float mixVal = 4.;
 
-  color = mix(tex0, tex1, 3 + 2 * sin(u_time * 0.1));
-  gl_FragColor = color;
+  color = mix(tex0, tex1, 0.5 + 0.5 * sin(u_time * 0.1));
+  gl_FragColor = tex1;
 }
 

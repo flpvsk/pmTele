@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include "ofMain.h"
 #include "pmView.h"
 
@@ -9,6 +10,8 @@ class pmFadingLines: public pmView {
     int maxPoints;
     ofColor bgColor;
     ofColor fgColor;
+    ofVec2f spread;
+    float speed;
 
   public:
     void setup() override;
