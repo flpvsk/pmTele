@@ -12,8 +12,7 @@ void ofApp::setup() {
   ofDisableArbTex();
   ofEnableAlphaBlending();
 
-  ofBackground(0);
-
+  bgColor = ofColor::fromHsb(0, 0, 20);
   for (auto &&app: apps) {
     app->setup();
   }
@@ -24,6 +23,14 @@ void ofApp::update() {
   while (receiver.hasWaitingMessages()) {
     ofxOscMessage m;
     receiver.getNextMessage(m);
+
+    if (m.getAddress() == "/color/bg/hsb") {
+      bgColor = ofColor::fromHsb(
+        255 * m.getArgAsFloat(0),
+        255 * m.getArgAsFloat(1),
+        255 * m.getArgAsFloat(2)
+      ).clamp();
+    }
 
     for (auto &&app: apps) {
       app->receiveOscMessage(m);
@@ -38,6 +45,7 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+  ofBackground(bgColor);
   auto &&app = apps[currentApp];
   app->draw();
 }

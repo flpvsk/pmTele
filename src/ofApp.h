@@ -16,6 +16,8 @@
 
 class ofApp : public ofBaseApp{
   private:
+    ofColor bgColor;
+
     ofxOscReceiver receiver;
 
     int currentApp;
@@ -25,7 +27,7 @@ class ofApp : public ofBaseApp{
       //   unique_ptr<pmLogoFeedback>(new pmLogoFeedback())
       // )),
       unique_ptr<pmFeedbackShaderWrapper>(new pmFeedbackShaderWrapper(
-        unique_ptr<pmRect>(new pmRect())
+        unique_ptr<pmFadingLines>(new pmFadingLines())
       )),
       // unique_ptr<pmFadingLines>(new pmFadingLines()),
     };

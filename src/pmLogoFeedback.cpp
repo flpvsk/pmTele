@@ -99,14 +99,6 @@ void pmLogoFeedback::draw() {
 }
 
 void pmLogoFeedback::receiveOscMessage(ofxOscMessage m) {
-  if (m.getAddress() == "/color/bg/hsb") {
-    bgColor = ofColor::fromHsb(
-      255 * m.getArgAsFloat(0),
-      255 * m.getArgAsFloat(1),
-      255 * m.getArgAsFloat(2)
-    ).clamp();
-  }
-
   if (m.getAddress() == "/color/fg/hsb") {
     fgColor = ofColor::fromHsb(
       255 * m.getArgAsFloat(0),

@@ -13,7 +13,7 @@ void pmRect::draw() {
   float h = ofGetHeight();
 
   ofNoFill();
-  ofSetColor(ofColor::fromHsb(40, 100, 100));
+  ofSetColor(ofColor::fromHsb(80, 160, 160));
   ofSetLineWidth(4);
 
   ofDrawRectangle(0.2 * w, 0.2 * h, 0.6 * w, 0.6 * h);

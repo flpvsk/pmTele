@@ -62,33 +62,32 @@ void pmFeedbackShaderWrapper::draw() {
   float h = ofGetHeight();
 
   framebuffer0.begin();
-  ofPoint center = ofPoint(w, h) * 0.5;
+  // ofPoint center = ofPoint(w, h) * 0.5;
 
-  ofPushMatrix();
-  ofTranslate(center);
+  // ofPushMatrix();
+  // ofTranslate(center);
 
   feedbackShader.begin();
 
   // auto fbTex = framebuffer2.getTexture();
   // fbTex.setTextureWrap(GL_REPEAT, GL_REPEAT);
+  framebuffer2.draw(0, 0);
 
-  auto& tex = framebuffer2.getTexture();
-  // tex.setAnchorPoint(w/2, h/2);
-  feedbackShader.setUniformTexture(
-    "u_tex0", tex, 0
-  );
-  feedbackShader.setUniform2f(
-    "u_tex0Resolution", w, h
-  );
+  // auto& tex = framebuffer2.getTexture();
+  // feedbackShader.setUniformTexture(
+  //   "u_tex0", tex, 0
+  // );
+  // feedbackShader.setUniform2f(
+  //   "u_tex0Resolution", w, h
+  // );
 
-  auto& tex1 = framebuffer1.getTexture();
-  // tex1.setAnchorPoint(w/2, h/2);
-  feedbackShader.setUniformTexture(
-    "u_tex1", tex1, 1
-  );
-  feedbackShader.setUniform2f(
-    "u_tex1Resolution", w, h
-  );
+  // auto& tex1 = framebuffer1.getTexture();
+  // feedbackShader.setUniformTexture(
+  //   "u_tex1", tex1, 1
+  // );
+  // feedbackShader.setUniform2f(
+  //   "u_tex1Resolution", w, h
+  // );
 
   feedbackShader.setUniform2f(
     "u_resolution", w, h
@@ -96,7 +95,7 @@ void pmFeedbackShaderWrapper::draw() {
 
   ofVec2f uDisplace = ofVec2f(
     ofGetElapsedTimef() / 2,
-    0
+    ofGetElapsedTimef() / 4
   );
 
   feedbackShader.setUniform2f(
@@ -109,24 +108,19 @@ void pmFeedbackShaderWrapper::draw() {
   );
 
   // ofScale(w * 0.5, h * 0.5, 1);
-  mesh.draw();
+  // mesh.draw();
   feedbackShader.end();
-  ofPopMatrix();
+
+  this->view->draw();
+  // ofDrawRectangle(0.4 * w, 0.4 * h, 0.2 * w, 0.2 * h);
+
+  // ofPopMatrix();
   framebuffer0.end();
-
-  framebuffer1.begin();
-  ofClear(0, 0, 0, 255);
-  ofSetColor(255, 255, 255, 255);
-  ofDrawRectangle(0.4 * w, 0.4 * h, 0.2 * w, 0.2 * h);
-
-  // this->view->draw();
-
-  framebuffer1.end();
 
   framebuffer0.draw(0, 0);
 
   framebuffer2.begin();
-  ofClear(0, 0, 0, 255);
+  ofClear(0, 0, 0, 0);
   // ofPushMatrix();
   // ofTranslate(center);
   // ofRotateZRad(ofGetElapsedTimef() / 4);
