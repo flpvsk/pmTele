@@ -4,6 +4,10 @@ void pmRect::setup() {
 
 }
 
+void pmRect::beforeRender() {
+
+}
+
 void pmRect::update() {
 
 }

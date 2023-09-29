@@ -38,8 +38,14 @@ void ofApp::update() {
   }
 
   auto seconds = ofGetElapsedTimeMillis() / 1000;
+  int prevApp = currentApp;
   currentApp = fmod(floor(seconds / 4), apps.size());
   auto &&app = apps[currentApp];
+
+  if (prevApp != currentApp) {
+    app->beforeRender();
+  }
+
   app->update();
 }
 

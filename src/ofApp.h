@@ -21,11 +21,11 @@ class ofApp : public ofBaseApp{
     ofxOscReceiver receiver;
 
     int currentApp;
-    std::array<unique_ptr<pmView>, 1> apps = {
-      // unique_ptr<pmWaveFeedback>(new pmWaveFeedback()),
-      // unique_ptr<pmFeedbackShaderWrapper>(new pmFeedbackShaderWrapper(
-      //   unique_ptr<pmLogoFeedback>(new pmLogoFeedback())
-      // )),
+    std::array<unique_ptr<pmView>, 3> apps = {
+      unique_ptr<pmLogoFeedback>(new pmLogoFeedback()),
+      unique_ptr<pmFeedbackShaderWrapper>(new pmFeedbackShaderWrapper(
+        unique_ptr<pmLogoFeedback>(new pmLogoFeedback())
+      )),
       unique_ptr<pmFeedbackShaderWrapper>(new pmFeedbackShaderWrapper(
         unique_ptr<pmFadingLines>(new pmFadingLines())
       )),

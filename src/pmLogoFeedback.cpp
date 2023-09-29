@@ -39,19 +39,30 @@ void pmLogoFeedback::setup() {
     "shadersGL2/traceShape.frag"
   );
 
-  mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
-  mesh.addVertex(ofPoint(-1.,-1));
-  mesh.addTexCoord(ofVec2f(0.,1.));
-  mesh.addColor(ofFloatColor(1.));
-  mesh.addVertex(ofPoint(-1.,1));
-  mesh.addTexCoord(ofVec2f(0.,0.));
-  mesh.addColor(ofFloatColor(1.));
-  mesh.addVertex(ofPoint(1.,1));
-  mesh.addTexCoord(ofVec2f(1.,0.));
-  mesh.addColor(ofFloatColor(1.));
-  mesh.addVertex(ofPoint(1.,-1));
-  mesh.addTexCoord(ofVec2f(1.,1.));
-  mesh.addColor(ofFloatColor(1.));
+  mesh = ofMesh::plane(ofGetWidth(), ofGetHeight());
+
+  // mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+  // mesh.addVertex(ofPoint(-1.,-1));
+  // mesh.addTexCoord(ofVec2f(0.,1.));
+  // mesh.addColor(ofFloatColor(1.));
+  // mesh.addVertex(ofPoint(-1.,1));
+  // mesh.addTexCoord(ofVec2f(0.,0.));
+  // mesh.addColor(ofFloatColor(1.));
+  // mesh.addVertex(ofPoint(1.,1));
+  // mesh.addTexCoord(ofVec2f(1.,0.));
+  // mesh.addColor(ofFloatColor(1.));
+  // mesh.addVertex(ofPoint(1.,-1));
+  // mesh.addTexCoord(ofVec2f(1.,1.));
+  // mesh.addColor(ofFloatColor(1.));
+}
+
+void pmLogoFeedback::beforeRender() {
+  fgColor = ofColor::fromHsb(
+    ofRandom(0, 360),
+    ofRandom(100, 255),
+    ofRandom(100, 255)
+  );
+  scale = ofRandom(0.001, 1);
 }
 
 void pmLogoFeedback::update() {
@@ -59,7 +70,6 @@ void pmLogoFeedback::update() {
 }
 
 void pmLogoFeedback::draw() {
-  ofBackground(bgColor);
   float width = ofGetWidth();
   float height = ofGetHeight();
   ofPoint center = ofPoint(width, height) * 0.5;
@@ -91,7 +101,7 @@ void pmLogoFeedback::draw() {
     fgColor.b / 255.
   );
 
-  ofScale(width * 0.5, height * 0.5, 1);
+  // ofScale(width * 0.5, height * 0.5, 1);
   mesh.draw();
 
   traceShapeShader.end();

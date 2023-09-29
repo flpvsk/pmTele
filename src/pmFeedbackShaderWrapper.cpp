@@ -2,6 +2,11 @@
 
 pmFeedbackShaderWrapper::pmFeedbackShaderWrapper(unique_ptr<pmView> v): view{std::move(v)} {}
 
+void pmFeedbackShaderWrapper::beforeRender() {
+  this->view->beforeRender();
+}
+
+
 void pmFeedbackShaderWrapper::setup() {
   bgColor = ofColor::fromHsb(0, 0, 20);
   float w = ofGetWidth();
@@ -11,9 +16,6 @@ void pmFeedbackShaderWrapper::setup() {
     "shadersGL2/generic.vert",
     "shadersGL2/feedback.frag"
   );
-
-  ofLoadImage(img, "img/perry-color-small.png");
-  img.setTextureWrap(GL_REPEAT, GL_REPEAT);
 
   framebuffer0.allocate(w, h);
   framebuffer1.allocate(w, h);
@@ -62,7 +64,7 @@ void pmFeedbackShaderWrapper::draw() {
   float h = ofGetHeight();
 
   framebuffer0.begin();
-  // ofPoint center = ofPoint(w, h) * 0.5;
+  ofPoint center = ofPoint(w, h) * 0.5;
 
   // ofPushMatrix();
   // ofTranslate(center);
@@ -111,7 +113,11 @@ void pmFeedbackShaderWrapper::draw() {
   // mesh.draw();
   feedbackShader.end();
 
+  // ofPushMatrix();
+  // ofTranslate(0, h);
+  // ofScale(1, -1, 1);
   this->view->draw();
+  // ofPopMatrix();
   // ofDrawRectangle(0.4 * w, 0.4 * h, 0.2 * w, 0.2 * h);
 
   // ofPopMatrix();

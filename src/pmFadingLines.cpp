@@ -2,12 +2,16 @@
 
 
 void pmFadingLines::setup() {
-  maxPoints = 100;
+  maxPoints = 20;
   bgColor = ofColor::fromHsb(0, 0, 20);
   fgColor = ofColor::fromHsb(0, 0, 255);
   spread = ofVec2f(0.01, 0.02);
   speed = 0.1;
 };
+
+void pmFadingLines::beforeRender() {
+
+}
 
 void pmFadingLines::update() {
   int frameDiv = static_cast<int>(1 / speed);

@@ -19,6 +19,10 @@ void pmWaveFeedback::setup() {
   framebuffer1.end();
 }
 
+void pmWaveFeedback::beforeRender() {
+
+}
+
 //--------------------------------------------------------------
 void pmWaveFeedback::update() {
 
