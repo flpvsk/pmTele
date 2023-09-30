@@ -18,21 +18,25 @@ class ofApp : public ofBaseApp{
   private:
     ofColor bgColor;
 
+    ofShader transitionShader;
+    ofFbo framebuffer0;
+    ofFbo framebuffer1;
+
     ofxOscReceiver receiver;
-    int viewDurationSec{4};
-    float transitionDurationSec{1};
+    int viewDurationSec{8};
+    float transitionDurationSec{4};
     float transitionPosition;
 
     int currentApp;
-    std::array<unique_ptr<pmView>, 2> apps = {
+    std::array<unique_ptr<pmView>, 4> apps = {
       unique_ptr<pmLogoFeedback>(new pmLogoFeedback()),
       unique_ptr<pmFeedbackShaderWrapper>(new pmFeedbackShaderWrapper(
         unique_ptr<pmLogoFeedback>(new pmLogoFeedback())
       )),
-      // unique_ptr<pmFeedbackShaderWrapper>(new pmFeedbackShaderWrapper(
-      //   unique_ptr<pmFadingLines>(new pmFadingLines())
-      // )),
-      // unique_ptr<pmFadingLines>(new pmFadingLines()),
+      unique_ptr<pmFeedbackShaderWrapper>(new pmFeedbackShaderWrapper(
+        unique_ptr<pmFadingLines>(new pmFadingLines())
+      )),
+      unique_ptr<pmFadingLines>(new pmFadingLines()),
     };
 
   public:

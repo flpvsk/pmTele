@@ -13,6 +13,26 @@ void ofApp::setup() {
   ofEnableAlphaBlending();
 
   bgColor = ofColor::fromHsb(0, 0, 20);
+
+  float w = ofGetWidth();
+  float h = ofGetHeight();
+
+  transitionShader.load(
+    "shadersGL2/generic.vert",
+    "shadersGL2/transition.frag"
+  );
+
+  framebuffer0.allocate(w, h);
+  framebuffer1.allocate(w, h);
+
+  framebuffer0.begin();
+  ofClear(0, 0, 0, 0);
+  framebuffer0.end();
+
+  framebuffer1.begin();
+  ofClear(0, 0, 0, 0);
+  framebuffer1.end();
+
   for (auto &&app: apps) {
     app->setup();
   }
@@ -38,7 +58,7 @@ void ofApp::update() {
   }
 
   float seconds = static_cast<float>(ofGetElapsedTimeMillis()) / 1000;
-  int prevApp = currentApp;
+  int prevFrameApp = currentApp;
   long appNum = floor(seconds / viewDurationSec);
   currentApp = fmod(appNum, apps.size());
   auto &&app = apps[currentApp];
@@ -50,10 +70,14 @@ void ofApp::update() {
     ) / transitionDurationSec
   );
 
-  if (prevApp != currentApp) {
-    app->beforeRender();
+  if (prevFrameApp != currentApp) {
+    // app->beforeRender();
   }
 
+  int prevApp = currentApp - 1;
+  if (prevApp < 0) prevApp = apps.size() - 1;
+
+  apps[prevApp]->update();
   app->update();
 }
 
@@ -63,18 +87,44 @@ void ofApp::draw() {
   int prevApp = currentApp - 1;
   if (prevApp < 0) prevApp = apps.size() - 1;
 
-  if (transitionPosition < 1) {
-    ofSetColor(255, 255, 255, 255 * (1 - transitionPosition));
-    apps[prevApp]->draw();
-    ofSetColor(255, 255, 255, 255 * transitionPosition);
-  }
+  framebuffer0.begin();
+    ofClear(0, 0, 0, 0);
+    if ((currentApp % 2) == 0) {
+      apps[prevApp]->draw();
+    } else {
+      apps[currentApp]->draw();
+    }
+  framebuffer0.end();
 
-  if (transitionPosition == 1) {
-    ofSetColor(255, 255, 255, 255);
-  }
+  framebuffer1.begin();
+    ofClear(0, 0, 0, 0);
+    if ((currentApp % 2) == 0) {
+      apps[currentApp]->draw();
+    } else {
+      apps[prevApp]->draw();
+    }
+  framebuffer1.end();
 
-  apps[currentApp]->draw();
-  ofSetColor(255, 255, 255, 255);
+  transitionShader.begin();
+    framebuffer0.draw(0, 0);
+
+    transitionShader.setUniform1i(
+      "u_flip", (currentApp % 2)
+    );
+
+    transitionShader.setUniformTexture(
+      "tex1", framebuffer1.getTexture(), 1
+    );
+
+    transitionShader.setUniform2f(
+      "u_resolution", ofGetWidth(), ofGetHeight()
+    );
+
+    transitionShader.setUniform1f(
+      "u_transition", transitionPosition
+    );
+  transitionShader.end();
+
   ofDrawBitmapString(
     ofToString(floor(transitionPosition * 100) / 100),
     10,
