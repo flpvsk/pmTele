@@ -6,7 +6,7 @@ void ofApp::setup() {
   receiver.setup(OSC_PORT);
 
   ofSetVerticalSync(true);
-  ofSetFrameRate(60);
+  ofSetFrameRate(12);
   ofDisableAntiAliasing();
   ofDisableSmoothing();
   ofDisableArbTex();
@@ -37,10 +37,18 @@ void ofApp::update() {
     }
   }
 
-  auto seconds = ofGetElapsedTimeMillis() / 1000;
+  float seconds = static_cast<float>(ofGetElapsedTimeMillis()) / 1000;
   int prevApp = currentApp;
-  currentApp = fmod(floor(seconds / 4), apps.size());
+  long appNum = floor(seconds / viewDurationSec);
+  currentApp = fmod(appNum, apps.size());
   auto &&app = apps[currentApp];
+
+  transitionPosition = (
+    fmin(
+      transitionDurationSec,
+      (seconds - appNum * viewDurationSec)
+    ) / transitionDurationSec
+  );
 
   if (prevApp != currentApp) {
     app->beforeRender();
@@ -52,8 +60,26 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
   ofBackground(bgColor);
-  auto &&app = apps[currentApp];
-  app->draw();
+  int prevApp = currentApp - 1;
+  if (prevApp < 0) prevApp = apps.size() - 1;
+
+  if (transitionPosition < 1) {
+    ofSetColor(255, 255, 255, 255 * (1 - transitionPosition));
+    apps[prevApp]->draw();
+    ofSetColor(255, 255, 255, 255 * transitionPosition);
+  }
+
+  if (transitionPosition == 1) {
+    ofSetColor(255, 255, 255, 255);
+  }
+
+  apps[currentApp]->draw();
+  ofSetColor(255, 255, 255, 255);
+  ofDrawBitmapString(
+    ofToString(floor(transitionPosition * 100) / 100),
+    10,
+    ofGetHeight() - 20
+  );
 }
 
 //--------------------------------------------------------------

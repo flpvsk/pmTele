@@ -1,8 +1,8 @@
 #version 120
 
 uniform sampler2D tex0;
+uniform sampler2D tex1;
 uniform vec2 u_resolution;
-uniform vec2 u_displace;
 
 uniform float u_time;
 
@@ -20,23 +20,26 @@ vec4 quantColor(vec4 v, float steps) {
 void main() {
   vec4 color = vec4(0,0,0,0);
   vec2 uv = gl_FragCoord.xy / u_resolution;
-  float fbAmount = (0.5 + 0.5 * sin(u_time * 0.1));
+  float fbAmount = 4 * (0.5 + 0.5 * sin(u_time * 0.1));
 
   vec4 texFb = texture2D(tex0, uv);
+  vec4 texView = texture2D(tex1, vec2(uv.x, 1. - uv.y));
   vec4 texFbDisplace = texture2D(
     tex0,
     (
       uv
-      // + 0.01 * vec2(sin(u_time * 0.1), sin(u_time * 0.02))
-    ) * (1.00 + 0.01 * sin(u_time * 0.1))
+      + 0.01 * vec2(sin(u_time * 0.1), sin(u_time * 0.02))
+    ) * (1.0001 + 0.0001 * sin(u_time * 0.1))
   );
 
   float mixVal = 4.;
 
-  color = fbAmount * mix(
-    texFb,
-    texFbDisplace, 2 + 4 * sin(u_time * 0.001)
+  color = mix(
+    mix(texFb, texFbDisplace, fbAmount),
+    texView,
+    texView.a
   );
+
   // color = quantColor(color, 2);
   // gl_FragColor = vec4(color.rgb - floor((100. * color.rgb)) / 100., 1.);
   gl_FragColor = color;

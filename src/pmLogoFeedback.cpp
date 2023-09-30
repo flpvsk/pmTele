@@ -62,7 +62,7 @@ void pmLogoFeedback::beforeRender() {
     ofRandom(100, 255),
     ofRandom(100, 255)
   );
-  scale = ofRandom(0.001, 1);
+  scale = ofRandom(0.1, 1);
 }
 
 void pmLogoFeedback::update() {
